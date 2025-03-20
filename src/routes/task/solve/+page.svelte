@@ -65,7 +65,7 @@
 	});
 
 	$: normalizedLanguage = taskData.language.toLowerCase();
-	$: timeEstimation = formatTime(taskData.timeEstimation);
+	$: timeEstimation = formatTime(taskData.timeEstimation * 60);
 
 	function startTimer() {
 		if (!isRunning) {
@@ -143,8 +143,7 @@
 		}
 	}
 
-	$: minutes = Math.floor(time / 60);
-	$: seconds = time % 60;
+	$: formattedTime = formatTime(time);
 
 	let showPopup = false;
 	let checkPopup = 0;
@@ -250,7 +249,7 @@
 		<div class="flex-none flex items-center justify-between">
 			<div>
 				<p class="font-semibold">Stoppuhr:</p>
-				<p>{minutes}:{seconds < 10 ? '0' + seconds : seconds}</p>
+				<p>{formattedTime}</p>
 				<div class="flex flex-wrap items-center gap-2 mt-2">
 					<button class="bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded" on:click={startTimer}>Start</button>
 					<button class="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded" on:click={stopTimer}>Stop</button>

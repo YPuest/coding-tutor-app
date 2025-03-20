@@ -66,7 +66,7 @@
 			generatedTask = data.task;
 			timeEstimation = data.time_estimation_minutes;
 
-			estimatedTime = formatTime(timeEstimation);
+			estimatedTime = formatTime(timeEstimation * 60);
 
 			taskStore.set({
 				task: data.task,
