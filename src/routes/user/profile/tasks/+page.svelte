@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { writable } from 'svelte/store';
-
+	import { API_BASE } from "$lib/config";
 	import { authStore } from '$lib/stores/authStore.js';
 
 	let auth = $authStore;
@@ -15,7 +15,7 @@
 		if (!auth.isLoggedIn) {
 			goto('/');
 		} else {
-			const res = await fetch(`http://localhost:8888/api/user/tasks?user_id=${auth.userId}`);
+			const res = await fetch(`${API_BASE}/api/user/tasks?user_id=${auth.userId}`);
 			const data = await res.json();
 			tasks.set(data);
 		}

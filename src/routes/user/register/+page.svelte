@@ -1,5 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { API_BASE } from "$lib/config";
+
 	let username = '';
 	let password = '';
 	let errorMessage = '';
@@ -7,7 +9,7 @@
 	async function handleRegister() {
 		errorMessage = '';
 		try {
-			const res = await fetch('http://localhost:8888/api/register', {
+			const res = await fetch(`${API_BASE}/api/register`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ username, password })

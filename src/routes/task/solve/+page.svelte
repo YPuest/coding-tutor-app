@@ -5,6 +5,7 @@
 	import { taskStore } from '$lib/stores/taskStore';
 	import { authStore } from '$lib/stores/authStore.js';
 	import { chatStore } from '$lib/stores/chatStore';
+	import { API_BASE } from "$lib/config";
 
 	import * as monaco from 'monaco-editor';
 
@@ -103,7 +104,7 @@
 		scrollToBottom();
 
 		try {
-			const res = await fetch('http://localhost:8888/api/chat/task-question', {
+			const res = await fetch(`${API_BASE}/api/chat/task-question`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -199,7 +200,7 @@
 		const latestCode = editor.getValue();
 
 		try {
-			const res = await fetch('http://localhost:8888/api/task/evaluate', {
+			const res = await fetch(`${API_BASE}/api/task/evaluate`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({

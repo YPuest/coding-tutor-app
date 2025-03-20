@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { authStore } from '$lib/stores/authStore.js';
+	import { API_BASE } from "$lib/config";
 
 	let auth = $authStore;
 	let username = "";
@@ -16,7 +17,7 @@
 	});
 
 	async function changeUsername() {
-		const res = await fetch('http://localhost:8888/api/user/settings/change-username', {
+		const res = await fetch(`${API_BASE}/api/user/settings/change-username`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ user_id: auth.userId, username })
@@ -31,7 +32,7 @@
 	}
 
 	async function changePassword() {
-		const res = await fetch('http://localhost:8888/api/user/settings/change-password', {
+		const res = await fetch(`${API_BASE}/api/user/settings/change-password`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ user_id: auth.userId, old_password: oldPassword, new_password: newPassword })
@@ -50,7 +51,7 @@
 			return;
 		}
 
-		const res = await fetch('http://localhost:8888/api/user/settings/delete-account', {
+		const res = await fetch(`${API_BASE}/api/user/settings/delete-account`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ user_id: auth.userId })

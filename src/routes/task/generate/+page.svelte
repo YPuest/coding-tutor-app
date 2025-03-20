@@ -3,6 +3,7 @@
 	import { authStore } from '$lib/stores/authStore';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import { API_BASE } from "$lib/config";
 
 	let auth;
 	let isClient = false;
@@ -45,7 +46,7 @@
 				normalizedLanguage = language.toLowerCase();
 			}
 
-			const response = await fetch('http://localhost:8888/api/task/generate', {
+			const response = await fetch(`${API_BASE}/api/task/generate`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -84,7 +85,7 @@
 
 	async function goToSolvePage() {
 		try {
-			const response = await fetch('http://localhost:8888/api/task/save', {
+			const response = await fetch(`${API_BASE}/api/task/save`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({

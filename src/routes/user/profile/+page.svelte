@@ -4,6 +4,7 @@
 	import { writable } from 'svelte/store';
 
 	import { authStore } from '$lib/stores/authStore.js';
+	import { API_BASE } from "$lib/config";
 
 	import DonutChart from '$lib/components/DonutChart.svelte';
 
@@ -21,7 +22,7 @@
 			goto('/');
 		} else {
 			try {
-				const res = await fetch(`http://localhost:8888/api/user/stats/general?user_id=${auth.userId}`);
+				const res = await fetch(`${API_BASE}/api/user/stats/general?user_id=${auth.userId}`);
 				if (!res.ok) throw new Error('API request failed');
 				const data = await res.json();
 				console.log('Fetched Stats:', data);

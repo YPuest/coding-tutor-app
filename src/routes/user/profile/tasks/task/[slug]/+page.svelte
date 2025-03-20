@@ -4,6 +4,7 @@
 	import { page } from '$app/state';
 	import Monaco from '$lib/components/Monaco.svelte';
 	import { goto } from '$app/navigation';
+	import { API_BASE } from "$lib/config";
 
 	let task = null;
 	let error = null;
@@ -18,7 +19,7 @@
 		console.log("Fetching task ID:", taskId);
 
 		try {
-			const res = await fetch(`http://localhost:8888/api/user/task/${taskId}`);
+			const res = await fetch(`${API_BASE}/api/user/task/${taskId}`);
 			if (!res.ok) throw new Error('Failed to fetch task data');
 
 			const data = await res.json();
