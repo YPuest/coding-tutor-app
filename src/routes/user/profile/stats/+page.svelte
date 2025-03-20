@@ -240,11 +240,11 @@
 			</div>
 			<div class="bg-gray-800 p-4 rounded-lg text-center">
 				<p class="text-lg">Note</p>
-				<p class="text-2xl font-bold">{$stats?.avg_mark?.toFixed(1) ?? 'N/A'}</p>
+				<p class="text-2xl font-bold">{$stats?.avg_mark?.toFixed(2) ?? 'N/A'}</p>
 			</div>
 			<div class="bg-gray-800 p-4 rounded-lg text-center">
 				<p class="text-lg">KI-Einsatz</p>
-				<p class="text-2xl font-bold">{$stats?.ai_usage_rate?.toFixed(1) ?? 'N/A'}%</p>
+				<p class="text-2xl font-bold">{$stats?.ai_usage_rate?.toFixed(0) ?? 'N/A'}%</p>
 			</div>
 			<div class="bg-gray-800 p-4 rounded-lg text-center">
 				<p class="text-lg">Sprachen</p>

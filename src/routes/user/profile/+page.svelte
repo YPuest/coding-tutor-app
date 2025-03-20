@@ -134,7 +134,7 @@
 
 					<p class="text-lg mt-4">KI-Einsatz</p>
 					<p class="text-2xl font-bold">
-						{$stats.ai_usage_rate !== null ? $stats.ai_usage_rate.toFixed(1) + '%' : 'N/A%'}
+						{$stats.ai_usage_rate !== null ? $stats.ai_usage_rate.toFixed(0) + '%' : 'N/A%'}
 					</p>
 
 					<p class="text-lg mt-4">Abgeschlossene Aufgaben</p>

@@ -134,15 +134,15 @@
 			</div>
 			<div class="bg-gray-800 p-4 rounded-lg text-center">
 				<p class="text-lg">Abschlussrate</p>
-				<p class="text-2xl font-bold">{(($stats.completed_tasks / $stats.total_tasks) * 100).toFixed(1)}%</p>
+				<p class="text-2xl font-bold">{(($stats.completed_tasks / $stats.total_tasks) * 100).toFixed(0)}%</p>
 			</div>
 			<div class="bg-gray-800 p-4 rounded-lg text-center">
 				<p class="text-lg">Note</p>
-				<p class="text-2xl font-bold">{$stats.avg_mark.toFixed(1)}</p>
+				<p class="text-2xl font-bold">{$stats.avg_mark.toFixed(2)}</p>
 			</div>
 			<div class="bg-gray-800 p-4 rounded-lg text-center">
 				<p class="text-lg">KI-Einsatz</p>
-				<p class="text-2xl font-bold">{(($stats.ai_with_usage / $stats.total_tasks) * 100).toFixed(1)}%</p>
+				<p class="text-2xl font-bold">{(($stats.ai_with_usage / $stats.completed_tasks) * 100).toFixed(0)}%</p>
 			</div>
 		</div>
 	{:else}
