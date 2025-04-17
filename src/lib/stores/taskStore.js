@@ -24,6 +24,7 @@ function createTaskStore() {
 				rating: '',
 				mark: 6,
 				timeComparison: '',
+				solution: '',
 			};
 		}
 	} else {
@@ -39,6 +40,7 @@ function createTaskStore() {
 			rating: '',
 			mark: 6,
 			timeComparison: '',
+			solution: '',
 		};
 	}
 

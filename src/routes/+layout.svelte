@@ -16,7 +16,7 @@
 	<nav class="bg-gray-800 text-white p-4 flex items-center">
 		<div class="flex items-center gap-4 flex-grow">
 			<a href="/" class="hover:underline">
-				Home
+				Start
 			</a>
 			{#if auth.isLoggedIn}
 				<a href="/user/profile" class="hover:underline">Profil</a>

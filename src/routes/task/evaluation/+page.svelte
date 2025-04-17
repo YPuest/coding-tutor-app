@@ -12,6 +12,7 @@
 	let isClient = false;
 	let taskData = $taskStore;
 	let messages = [];
+	$: hasChat = taskData.useAI && messages.length > 0;
 
 	onMount(() => {
 		isClient = true;
@@ -29,8 +30,6 @@
 			messages = state[taskData.taskId] || [];
 		});
 	}
-
-	$: gridColsClass = taskData.useAI && messages.length > 0 ? 'grid-cols-3' : 'grid-cols-2';
 
 	onDestroy(() => {
 		const currentTaskId = taskData.taskId;
@@ -55,37 +54,53 @@
 	});
 </script>
 
-<div class="bg-gray-900 text-white flex flex-col items-center justify-center p-6 w-[95%] mx-auto h-[calc(100vh-56px)]">
-	<h1 class="text-3xl font-bold mb-4">Bewertung</h1>
+<div class="w-screen h-[calc(100vh-56px)] overflow-y-auto bg-gray-900 text-white flex flex-col">
+	<div class="flex-1 flex flex-col p-6 gap-6 overflow-hidden">
+		<h1 class="text-3xl font-bold mb-2">Bewertung</h1>
+		<div class={`grid ${hasChat ? 'grid-cols-3' : 'grid-cols-2'} gap-4 bg-gray-800 rounded shadow-lg w-full p-4 max-h-[calc(100vh-150px)] overflow-y-auto`}>
 
-	<div class="grid gap-4 bg-gray-800 p-4 rounded shadow-lg min-h-[95%] w-full {gridColsClass}">
-			<Monaco
-				bind:code={taskData.code}
-				bind:language={taskData.language}
-				theme="vs-dark"
-				readOnly={true}
-				options={{
-					minimap: { enabled: false },
-					wordWrap: "on",
-					lineNumbers: "on",
-					scrollBeyondLastLine: false
-				}}
-			/>
+		<Monaco
+			bind:code={taskData.code}
+			bind:language={taskData.language}
+			theme="vs-dark"
+			readOnly={true}
+			options={{
+				minimap: { enabled: false },
+				wordWrap: "on",
+				lineNumbers: "on",
+				scrollBeyondLastLine: false
+			}}
+			class="max-h-full overflow-auto"
+		/>
 
-		<div class="rounded h-full flex flex-col items-center">
-			<div class="bg-gray-700 text-white font-bold text-2xl p-4 rounded w-full text-center">
+		<div class="flex flex-col gap-2 h-full max-h-full overflow-auto">
+			<div class="bg-gray-700 text-white font-bold text-2xl p-4 rounded text-center">
 				{taskData.mark}
 			</div>
 
-			<div class="overflow-auto bg-gray-700 text-white p-4 rounded w-full h-full mt-1">
-				<p class="mt-4">
-					{taskData.rating}
-				</p>
+			<div class="overflow-auto bg-gray-700 text-white p-4 rounded flex-1 max-h-full">
+				<p class="mt-4">{taskData.rating}</p>
+			</div>
+
+			<div class="bg-gray-700 text-white p-4 rounded flex-1 overflow-auto max-h-full">
+				<Monaco
+					bind:code={taskData.solution}
+					bind:language={taskData.language}
+					theme="vs-dark"
+					readOnly={true}
+					options={{
+						minimap: { enabled: false },
+						wordWrap: "on",
+						lineNumbers: "on",
+						scrollBeyondLastLine: false
+					}}
+					class="max-h-full overflow-auto"
+				/>
 			</div>
 		</div>
 
-		{#if taskData.useAI && messages.length > 0}
-			<div class="flex-1 overflow-y-auto bg-gray-700 p-4 flex flex-col gap-2 h-full rounded">
+		{#if hasChat}
+			<div class="flex-1 overflow-y-auto bg-gray-700 p-4 flex flex-col gap-2 h-full rounded max-h-full">
 				{#each messages as msg}
 					<div class="flex" class:justify-end={msg.role === 'user'}>
 						<div class={
@@ -100,6 +115,7 @@
 				{/each}
 			</div>
 		{/if}
+		</div>
 
 	</div>
 </div>

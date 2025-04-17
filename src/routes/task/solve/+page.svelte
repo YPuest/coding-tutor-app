@@ -26,16 +26,27 @@
 	let chatContainer;
 
 	let time = 0;
+	let timeEstimationSeconds = 0;
 	let timer = null;
 	let isRunning = false;
+	let showOverdueWarning = false;
 
 	$: taskData = $taskStore;
 
 	let timeRemaining = 0;
 	$: {
-		let timeEstimationSeconds = taskData.timeEstimation * 60;
+		timeEstimationSeconds = taskData.timeEstimation * 60;
 		if (time < timeEstimationSeconds) {
 			timeRemaining = timeEstimationSeconds - time;
+		}
+	}
+
+	$: {
+		if (isRunning && timeEstimationSeconds > 0 && time >= timeEstimationSeconds && !showOverdueWarning) {
+			showOverdueWarning = true;
+			setTimeout(() => {
+				showOverdueWarning = false;
+			}, 4000);
 		}
 	}
 
@@ -91,7 +102,9 @@
 
 	async function sendMessage() {
 		if (!userInput.trim()) return;
-
+		if (!isRunning) {
+			startTimer();
+		}
 		messages = [...messages, { role: 'user', content: userInput }];
 		const userMsg = userInput;
 
@@ -145,23 +158,24 @@
 
 	$: formattedTime = formatTime(time);
 
-	let showPopup = false;
-	let checkPopup = 0;
+	let showTimerPopup = false;
+	let checkTimerPopup = 0;
 
 	function handleEditorFocus() {
-		showPopup = true;
-		checkPopup++;
+		showTimerPopup = true;
+		checkTimerPopup++;
 
-		if (checkPopup === 1) {
+		if (checkTimerPopup === 1) {
 			startTimer();
 		}
 	}
 
 	function closePopup() {
-		showPopup = false;
+		showTimerPopup = false;
+		checkTimerPopup = 0;
 	}
 
-	$: if (showPopup) {
+	$: if (showTimerPopup) {
 		setTimeout(() => {
 			closePopup();
 		}, 3000);
@@ -227,6 +241,7 @@
 				rating: data.rating,
 				mark: data.mark,
 				timeComparison: data.timeComparison,
+				solution: data.solution,
 			}));
 
 			goto('/task/evaluation');
@@ -240,9 +255,15 @@
 <div class="w-screen h-[calc(100vh-56px)] overflow-hidden bg-gray-900 text-white flex flex-col">
 	<div class="flex-1 flex flex-col p-6 gap-6 overflow-hidden">
 
-		{#if (showPopup && checkPopup === 1)}
+		{#if (showTimerPopup && checkTimerPopup === 1)}
 			<div class="fixed left-1/2 transform -translate-x-1/2 bg-blue-600 text-white p-2 rounded shadow-lg animate-pulse">
 				Timer gestartet! Viel Erfolg.
+			</div>
+		{/if}
+
+		{#if showOverdueWarning}
+			<div class="fixed left-1/2 transform -translate-x-1/2 bg-red-600 text-white p-2 rounded shadow-lg animate-pulse z-50">
+				⚠️ Zeit überschritten!
 			</div>
 		{/if}
 
@@ -284,45 +305,44 @@
 			<p>{taskData.task}</p>
 		</div>
 
-		<div class="flex-1 min-h-0 flex flex-col gap-4 overflow-hidden">
-			<div class="flex flex-col flex-1 overflow-hidden">
-				<div class="overflow-hidden p-4 bg-gray-800 rounded mb-2 min-h-3/5">
-					<div bind:this={editorContainer} on:click={handleEditorFocus} class="w-full h-80 bg-gray-800"></div>
-				</div>
-
-				{#if useAI}
-					<div class="overflow-auto p-4 bg-gray-800 rounded flex flex-col min-h-2/5">
-						<h3 class="text-lg font-semibold mb-2">Chat</h3>
-						<div class="flex-1 overflow-y-auto border border-gray-700 p-2 mb-2 flex flex-col gap-2" bind:this={chatContainer}>
-							{#each messages as msg}
-								<div class="flex" class:justify-end={msg.role === 'user'}>
-									<div class={
-											msg.role === 'assistant'
-												? 'bg-blue-600 text-white p-2 rounded-lg max-w-[66%]'
-												: 'bg-green-600 text-white p-2 rounded-lg max-w-[66%]'
-										}
-									>
-										{msg.content}
-									</div>
-								</div>
-							{/each}
-						</div>
-						<div class="flex">
-							<input
-								type="text"
-								bind:value={userInput}
-								class="flex-1 bg-gray-700 text-white p-2 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500"
-								placeholder="Deine Frage an ChatGPT..."
-							/>
-							<button
-								class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-r"
-								on:click={sendMessage}>
-								Senden
-							</button>
-						</div>
-					</div>
-				{/if}
+		<div class="flex flex-1 gap-4 overflow-hidden">
+			<div class="w-2/3 h-full overflow-hidden p-4 bg-gray-800 rounded">
+				<div bind:this={editorContainer} on:click={handleEditorFocus} class="w-full h-full bg-gray-800"></div>
 			</div>
+
+			{#if useAI}
+				<div class="w-1/3 h-full overflow-hidden p-4 bg-gray-800 rounded flex flex-col">
+					<h3 class="text-lg font-semibold mb-2">Chat</h3>
+					<div class="flex-1 overflow-y-auto border border-gray-700 p-2 mb-2 flex flex-col gap-2" bind:this={chatContainer}>
+						{#each messages as msg}
+							<div class="flex" class:justify-end={msg.role === 'user'}>
+								<div class={
+									msg.role === 'assistant'
+										? 'bg-blue-600 text-white p-2 rounded-lg max-w-[100%]'
+										: 'bg-green-600 text-white p-2 rounded-lg max-w-[100%]'
+									}
+								>
+									{msg.content}
+								</div>
+							</div>
+						{/each}
+					</div>
+					<div class="flex">
+						<input
+							type="text"
+							bind:value={userInput}
+							on:click={handleEditorFocus}
+							class="flex-1 bg-gray-700 text-white p-2 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500"
+							placeholder="Deine Frage an ChatGPT..."
+						/>
+						<button
+							class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-r"
+							on:click={sendMessage}>
+							Senden
+						</button>
+					</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 </div>
