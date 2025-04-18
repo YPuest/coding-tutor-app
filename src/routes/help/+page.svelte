@@ -13,7 +13,7 @@
 
 		<section>
 			<h2 class="text-2xl font-semibold mb-2">📌 Allgemeines</h2>
-			<p>Diese Anwendung unterstützt dich dabei, deine Programmierfähigkeiten zu erlernen und zu verbessern –
+			<p>Diese Anwendung unterstützt dich dabei, Programmierfähigkeiten zu erlernen oder sie zu verbessern –
 				auf Wunsch mit Hilfe einer KI. Ziel ist es, durch praxisnahe Übungen und direktes Feedback den Lernprozess
 				zu fördern.</p>
 		</section>
