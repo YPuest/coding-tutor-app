@@ -4,6 +4,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { API_BASE } from "$lib/config";
+	import InfoIcon from '$lib/components/InfoIcon.svelte';
 
 	let auth;
 	let isClient = false;
@@ -163,6 +164,7 @@
 						bind:checked={useAI}
 					/>
 					<span>KI-Unterstützung aktivieren</span>
+					<InfoIcon tooltip="KI-Unterstützung aktivieren ermöglicht dir, Hilfe über den Chat zu erhalten."/>
 				</label>
 			</div>
 

@@ -64,6 +64,7 @@
 				<tr>
 					<th class="px-4 py-3">Aufgabe</th>
 					<th class="px-4 py-3">Sprache</th>
+					<th class="px-4 py-3">Level</th>
 					<th class="px-4 py-3">Note</th>
 					<th class="px-4 py-3">Bewertung</th>
 					<th class="px-4 py-3">KI-Einsatz</th>
@@ -81,6 +82,7 @@
 							<div class="tooltiptext">{task.description}</div>
 						</td>
 						<td class="px-4 py-3">{task.language}</td>
+						<td class="px-4 py-3">{task.level}</td>
 						<td class="px-4 py-3">{task.mark ?? '-'}</td>
 						<td class="px-4 py-3 tooltip">
 							{task.rating ? task.rating.slice(0, 20) + '...' : 'Keine Bewertung'}

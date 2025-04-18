@@ -7,6 +7,8 @@
 	import { chatStore } from '$lib/stores/chatStore';
 	import { API_BASE } from "$lib/config";
 
+	import InfoIcon from '$lib/components/InfoIcon.svelte';
+
 	import * as monaco from 'monaco-editor';
 
 	let auth;
@@ -71,7 +73,7 @@
 		unsub();
 
 		if (!visited) {
-			goto('/task/generate');
+			//goto('/task/generate');
 		}
 	});
 
@@ -312,7 +314,10 @@
 
 			{#if useAI}
 				<div class="w-1/3 h-full overflow-hidden p-4 bg-gray-800 rounded flex flex-col">
-					<h3 class="text-lg font-semibold mb-2">Chat</h3>
+					<div class="flex items-center gap-2 mb-2">
+						<h3 class="text-lg font-semibold">Chat</h3>
+						<InfoIcon tooltip="Die KI berücksichtigt nur die letzten 10 Nachrichten im Chat. Der Code im Editor wird nicht automatisch übermittelt." />
+					</div>
 					<div class="flex-1 overflow-y-auto border border-gray-700 p-2 mb-2 flex flex-col gap-2" bind:this={chatContainer}>
 						{#each messages as msg}
 							<div class="flex" class:justify-end={msg.role === 'user'}>
@@ -341,6 +346,9 @@
 							Senden
 						</button>
 					</div>
+					<span class="text-gray-600 text-xs mt-2">
+						ChatGPT kann Fehler machen. Überprüfe wichtige Informationen.
+					</span>
 				</div>
 			{/if}
 		</div>

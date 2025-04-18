@@ -7,6 +7,7 @@
 	import { chatStore } from '$lib/stores/chatStore';
 
 	import Monaco from '$lib/components/Monaco.svelte';
+	import InfoIcon from '$lib/components/InfoIcon.svelte';
 
 	let auth;
 	let isClient = false;
@@ -56,7 +57,10 @@
 
 <div class="w-screen h-[calc(100vh-56px)] overflow-y-auto bg-gray-900 text-white flex flex-col">
 	<div class="flex-1 flex flex-col p-6 gap-6 overflow-hidden">
-		<h1 class="text-3xl font-bold mb-2">Bewertung</h1>
+		<div class="flex items-center gap-2 mb-2">
+			<h1 class="text-3xl font-bold">Bewertung</h1>
+			<InfoIcon tooltip="Diese Bewertung wurde vollständig durch ChatGPT erstellt. Sie basiert auf der übermittelten Lösung und Aufgabenbeschreibung, kann aber Fehler oder ungenaue Einschätzungen enthalten." />
+		</div>
 		<div class={`grid ${hasChat ? 'grid-cols-3' : 'grid-cols-2'} gap-4 bg-gray-800 rounded shadow-lg w-full p-4 max-h-[calc(100vh-150px)] overflow-y-auto`}>
 
 		<Monaco
@@ -97,6 +101,10 @@
 					class="max-h-full overflow-auto"
 				/>
 			</div>
+
+			<span class="text-gray-500 text-xs text-center mt-2">
+				ChatGPT kann Fehler machen. Überprüfe wichtige Informationen kritisch.
+			</span>
 		</div>
 
 		{#if hasChat}

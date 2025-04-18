@@ -3,6 +3,7 @@
 	import { authStore } from '$lib/stores/authStore.js';
 	import { page } from '$app/state';
 	import Monaco from '$lib/components/Monaco.svelte';
+	import InfoIcon from '$lib/components/InfoIcon.svelte';
 	import { goto } from '$app/navigation';
 	import { API_BASE } from "$lib/config";
 
@@ -57,11 +58,21 @@
 					<td class="p-3 h-[4rem]">{task.language}</td>
 				</tr>
 				<tr class="border-b border-gray-700">
-					<th class="p-3 bg-gray-800 text-gray-300">Bewertung</th>
+					<th class="p-3 bg-gray-800 text-gray-300">Level</th>
+					<td class="p-3 h-[4rem]">{task.level}</td>
+				</tr>
+				<tr class="border-b border-gray-700">
+					<th class="p-3 bg-gray-800 text-gray-300">
+						Bewertung
+						<InfoIcon tooltip="Diese Bewertung wurde vollständig durch ChatGPT erstellt. Sie basiert auf der übermittelten Lösung und Aufgabenbeschreibung, kann aber Fehler oder ungenaue Einschätzungen enthalten."/>
+					</th>
 					<td class="p-3 h-[4rem] max-h-[4rem] overflow-y-auto">{task.rating}</td>
 				</tr>
 				<tr class="border-b border-gray-700">
-					<th class="p-3 bg-gray-800 text-gray-300">Note</th>
+					<th class="p-3 bg-gray-800 text-gray-300">
+						Note
+						<InfoIcon tooltip="Diese Note wurde vollständig durch ChatGPT erstellt. Sie basiert auf der übermittelten Lösung und Aufgabenbeschreibung, kann eine ungenaue Einschätzungen sein."/>
+					</th>
 					<td class="p-3 h-[4rem]">{task.mark ?? 'N/A'}</td>
 				</tr>
 				<tr class="border-b border-gray-700">
@@ -69,7 +80,10 @@
 					<td class="p-3 h-[4rem]">{formatTime(task.time_spent)}</td>
 				</tr>
 				<tr class="border-b border-gray-700">
-					<th class="p-3 bg-gray-800 text-gray-300">Geschätzte Zeit</th>
+					<th class="p-3 bg-gray-800 text-gray-300">
+						Geschätzte Zeit
+						<InfoIcon tooltip="Diese Zeitschätzung wurde durch ChatGPT erstellt. Sie basiert auf der Aufgabe und dem Level, kann aber Fehler oder ungenaue Einschätzungen enthalten."/>
+					</th>
 					<td class="p-3 h-[4rem]">{formatTime(task.time_estimated)}</td>
 				</tr>
 				<tr>
