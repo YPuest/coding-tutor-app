@@ -57,12 +57,6 @@
 		</div>
 	</div>
 
-	<div class="flex gap-2 mb-4">
-		<button class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded" on:click={() => sortBy = 'language'}>Sprache</button>
-		<button class="bg-gray-800 hover:bg-gray-700 py-2 px-4 rounded" on:click={() => sortBy = 'mark'}>Note</button>
-		<button class="bg-gray-800 hover:bg-gray-700 py-2 px-4 rounded" on:click={() => sortBy = 'ai_usage'}>KI-Einsatz</button>
-	</div>
-
 	<div class="table-container rounded-lg shadow flex-1 overflow-hidden relative">
 		<div class="table-wrapper overflow-y-scroll max-h-[70vh]">
 			<table class="w-full text-left divide-y divide-gray-700">

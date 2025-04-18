@@ -14,7 +14,7 @@
 
 <div class="h-screen overflow-hidden bg-gray-900 text-white flex flex-col">
 	<nav class="bg-gray-800 text-white p-4 flex items-center">
-		<div class="flex items-center gap-4 flex-grow">
+		<div class="flex items-center gap-6 flex-grow">
 			<a href="/" class="hover:underline">
 				Start
 			</a>
@@ -22,6 +22,9 @@
 				<a href="/user/profile" class="hover:underline">Profil</a>
 				<a href="/task/generate" class="hover:underline">Übung</a>
 			{/if}
+			<a href="/help" class="hover:underline">
+				Hilfe
+			</a>
 		</div>
 
 		<div class="flex items-center gap-4">
