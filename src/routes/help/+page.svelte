@@ -8,7 +8,7 @@
 </script>
 
 <div class="w-screen h-[calc(100vh-56px)] bg-gray-900 text-white flex items-center justify-center p-6 overflow-hidden">
-	<div bind:this={container} class="w-full max-w-4xl h-full bg-gray-800 rounded-lg shadow-lg overflow-y-auto p-6 space-y-6" id="help-container">
+	<div bind:this={container} class="w-full max-w-6xl h-full bg-gray-800 rounded-lg shadow-lg overflow-y-auto p-4 space-y-6" id="help-container">
 		<h1 class="text-3xl font-bold text-center">Hilfe & Anleitung</h1>
 
 		<section>
