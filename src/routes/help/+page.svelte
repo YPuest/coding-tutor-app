@@ -1,4 +1,6 @@
 <script>
+	import InfoIcon from '$lib/components/InfoIcon.svelte';
+
 	let container;
 
 	function scrollToTop() {
@@ -45,6 +47,16 @@
 					</ul>
 				</li>
 			</ul>
+
+			<div class="mt-6 mb-4">
+				<p class="text-left flex items-center gap-1">
+					Zusätzliche Informationen sind über kleine Info-Icons
+					<span class="inline-flex">
+						<InfoIcon tooltip="mehr Infos..." />
+					</span>
+					abrufbar – einfach mit der Maus darüber fahren.
+				</p>
+			</div>
 		</section>
 
 		<section class="bg-yellow-900/30 border-l-4 border-yellow-500 text-yellow-100 p-4 rounded mb-10">
