@@ -73,25 +73,34 @@
 		unsub();
 
 		if (!visited) {
-			//goto('/task/generate');
+			goto('/task/generate');
 		}
 	});
 
 	$: normalizedLanguage = taskData.language.toLowerCase();
 	$: timeEstimation = formatTime(taskData.timeEstimation * 60);
 
+	let showTimerPopup = false;
+
 	function startTimer() {
 		if (!isRunning) {
 			isRunning = true;
+			showTimerPopup = true;
 			timer = setInterval(() => {
 				time++;
 			}, 1000);
+
+			setTimeout(() => {
+				showTimerPopup = false;
+			}, 3000);
 		}
 	}
+
 	function stopTimer() {
 		isRunning = false;
 		clearInterval(timer);
 	}
+
 	function resetTimer() {
 		time = 0;
 	}
@@ -160,27 +169,10 @@
 
 	$: formattedTime = formatTime(time);
 
-	let showTimerPopup = false;
-	let checkTimerPopup = 0;
-
 	function handleEditorFocus() {
-		showTimerPopup = true;
-		checkTimerPopup++;
-
-		if (checkTimerPopup === 1) {
+		if (!isRunning) {
 			startTimer();
 		}
-	}
-
-	function closePopup() {
-		showTimerPopup = false;
-		checkTimerPopup = 0;
-	}
-
-	$: if (showTimerPopup) {
-		setTimeout(() => {
-			closePopup();
-		}, 3000);
 	}
 
 	onDestroy(() => {
@@ -257,7 +249,7 @@
 <div class="w-screen h-[calc(100vh-56px)] overflow-hidden bg-gray-900 text-white flex flex-col">
 	<div class="flex-1 flex flex-col p-6 gap-6 overflow-hidden">
 
-		{#if (showTimerPopup && checkTimerPopup === 1)}
+		{#if (showTimerPopup)}
 			<div class="fixed left-1/2 transform -translate-x-1/2 bg-blue-600 text-white p-2 rounded shadow-lg animate-pulse">
 				Timer gestartet! Viel Erfolg.
 			</div>

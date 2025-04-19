@@ -67,12 +67,12 @@
 
 			<div class="bg-gray-700 rounded-lg shadow p-4 mb-6">
 				<h3 class="text-xl font-semibold mb-2">Aufgabengenerierung</h3>
-				<img src="/images/help/task_generate.png" alt="Aufgabengenerierung" loading="lazy" class="rounded w-full" />
+				<img src="/images/help/task_generation_start.png" alt="Aufgabengenerierung" loading="lazy" class="rounded w-full" />
 			</div>
 
 			<div class="bg-gray-700 rounded-lg shadow p-4 mb-6">
 				<h3 class="text-xl font-semibold mb-2">Generierte Aufgabe</h3>
-				<img src="/images/help/task_generated.png" alt="Generierte Aufgabe" loading="lazy" class="rounded w-full" />
+				<img src="/images/help/task_generation_done.png" alt="Generierte Aufgabe" loading="lazy" class="rounded w-full" />
 			</div>
 
 			<div class="bg-gray-700 rounded-lg shadow p-4 mb-6">

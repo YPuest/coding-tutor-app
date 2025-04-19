@@ -182,7 +182,12 @@
 		</div>
 
 		<div class="w-full max-w-md border border-gray-700 bg-gray-800 p-4 rounded">
-			<h2 class="text-xl font-semibold mb-2">Aufgaben-Vorschau</h2>
+			<div class="flex items-center gap-2 mb-2">
+				<h2 class="text-xl font-semibold mb-2">Aufgaben-Vorschau</h2>
+				<div class="self-center">
+					<InfoIcon tooltip="Die Aufgabe wird mit Hilfe von KI generiert. Inhalte können ungenau oder fehlerhaft sein. Die Zeitangabe dient lediglich als grobe Orientierung." />
+				</div>
+			</div>
 			{#if generatedTask}
 				<p class="mb-2">{generatedTask}</p>
 				<p class="text-sm text-gray-400">
