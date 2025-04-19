@@ -58,6 +58,13 @@
 				<li>Hilfestellungen im Chat</li>
 				<li>Aufgabenbewertung</li>
 			</ul>
+			<div class="mt-6 bg-yellow-800/40 p-3 rounded border border-yellow-600 italic">
+				Bitte beachte, dass der KI-gestützte Tutor lediglich als ergänzendes Hilfsmittel dient.
+				Er ersetzt keine vollständige Programmierausbildung und kann insbesondere bei komplexeren
+				Fragen oder individuellen Lernfortschritten an seine Grenzen stoßen. Die bereitgestellten
+				Inhalte sollten daher stets kritisch überprüft und bei Unsicherheiten durch weitere Recherche
+				oder Rücksprache mit Fachpersonen ergänzt werden.
+			</div>
 		</section>
 
 		<hr class="my-12 h-0.5 border-t-0 bg-white/10">
