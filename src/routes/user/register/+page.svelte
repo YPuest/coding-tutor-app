@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { API_BASE } from "$lib/config";
+	import { authStore } from '$lib/stores/authStore';
 
 	let username = '';
 	let password = '';
@@ -18,7 +19,9 @@
 				const data = await res.json();
 				throw new Error(data.error || 'Registrierung fehlgeschlagen');
 			}
-			goto('/user/login');
+			const data = await res.json();
+			authStore.login(data.user_id, username);
+			goto('/task/generate');
 		} catch (err) {
 			errorMessage = err.message;
 		}
